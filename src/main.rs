@@ -18,7 +18,7 @@ pub extern "C" fn _start() -> ! {
     }
 
     // trigger a stack overflow
-    stack_overflow();
+    //stack_overflow();
 
     //trigger  a page fault
     // unsafe {
@@ -32,7 +32,7 @@ pub extern "C" fn _start() -> ! {
     test_main();
 
     println!("It did not crash ");
-    loop {}
+    ssebide_os::hlt_loop();
 }
 
 /// This function is called on panic.
@@ -40,7 +40,7 @@ pub extern "C" fn _start() -> ! {
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
     println!("{}", info);
-    loop {}
+    ssebide_os::hlt_loop();
 }
 
 #[cfg(test)]
