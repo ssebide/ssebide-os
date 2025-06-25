@@ -7,6 +7,9 @@
 use bootloader::{entry_point, BootInfo};
 use core::panic::PanicInfo;
 use ssebide_os::println;
+use ssebide_os::task::executor::Executor;
+use ssebide_os::task::keyboard;
+use ssebide_os::task::{simple_executor::SimpleExecutor, Task};
 
 extern crate alloc;
 
@@ -63,6 +66,12 @@ fn kernel_main(boot_info: &'static BootInfo) -> ! {
 
     let x = Box::new(41);
 
+    let mut executor = SimpleExecutor::new();
+    let mut executor = Executor::new();
+    executor.spawn(Task::new(example_task()));
+    executor.spawn(Task::new(keyboard::print_keypresses()));
+    executor.run();
+
     #[cfg(test)]
     test_main();
 
@@ -87,4 +96,13 @@ fn panic(info: &PanicInfo) -> ! {
 #[test_case]
 fn trivial_assertion() {
     assert_eq!(1, 1);
+}
+
+async fn async_number() -> u32 {
+    42
+}
+
+async fn example_task() {
+    let number = async_number().await;
+    println!("async number: {}", number);
 }
