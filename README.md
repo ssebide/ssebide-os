@@ -4,7 +4,7 @@
 
 # ssebide-os
 
-**A robust, high-performance operating system kernel written in Rust.**
+**A simple operating system kernel written in Rust.**
 
 [![Rust Nightly](https://img.shields.io/badge/rust-nightly-orange.svg?logo=rust)](https://www.rust-lang.org/)
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/ssebide/ssebide-os)
